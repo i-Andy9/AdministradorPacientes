@@ -1,0 +1,26 @@
+{
+  "name": "fullstack-api",
+  "version": "1.0.0",
+  "description": "backend en mongo y express",
+  "main": "Index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-Andy9/AdministradorPacientes.git"
+  },
+  "author": "Andre Zapata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/i-Andy9/AdministradorPacientes/issues"
+  },
+  "homepage": "https://github.com/i-Andy9/AdministradorPacientes#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
