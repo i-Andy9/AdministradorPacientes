@@ -4,13 +4,28 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./Routes/index_routes.js')
 const BodyParser = require('body-parser')
+const cors = require('cors')
 
 //create server
 const server = express();
 
+//enable whitelist to connect to db by domain
+const whiteList = ['http://localhost:4000'];
+const corsBlock = {
+    origin: (origin, callback) =>{
+        const exist = whiteList.some(dominio => dominio === origin);
+        exist ? callback(null,true) : callback(new Error('No permito cargar por CORS'))
+    }
+}
+
+//habilitar cors o corsBlock
+//server.use(corsBlock())
+server.use(cors())
+
 //conect db 
 mongoose.Promise= global.Promise;
-mongoose.connect('mongodb+srv://iAndy9:AQZAswxsDECD123!@cluster0.pbgbp.mongodb.net/veterinaria?retryWrites=true&w=majority');
+
+mongoose.connect('mongodb+srv://root:MBAhh2UU2zTzLWDO@cluster0.pbgbp.mongodb.net/veterinaria?retryWrites=true&w=majority');
 
 //habilitar boyd-parser 
 server.use(BodyParser.json());
@@ -22,12 +37,4 @@ server.use('/',routes())
 //port & turn on server 
 server.listen(4000,()=>{
     console.log('Server funcionando');
-})
-/* const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://<username>:<password>@azcluster.nb7gg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-}); */
+}) 
